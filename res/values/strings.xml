@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HatToss</string>
+    <string name="action_settings">Settings</string>
+    <string name="attension_text">広い場所で周りに危険がないか十分ご確認の上、お楽しみ下さい。\n本アプリを使用することによって発生したいかなる損害も、責任を負うことはできません。\nくれぐれも自己責任でお願い致します！</string>
+    <string name="button_agree">同意する</string>
+    <string name="tutorial">TUTORIAL</string>
+    <string name="ranking">RANKING</string>
+    <string name="attention">注意事項</string>
+    <string name="retry">RETRY!!</string>
+    <string name="tweet">TWEET!!</string>
+    <string name="button_ready">Hold here!!</string>
+    <string name="nodata">No Result</string>
+    <string name="result">Best 10 Result</string>
+
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ボタンが押されたときの定義 -->
+    <item android:state_pressed="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+            <solid android:color="#80374e70" />
+
+            <size android:height="250dp" android:width="250dp" />
+        </shape></item>
+    <!-- ボタンが押されていないときの定義 -->
+    <item android:state_pressed="false">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+            <solid android:color="#8084b5ff" />
+
+            <size android:height="250dp" android:width="250dp" />
+        </shape></item>
+
+</selector>
