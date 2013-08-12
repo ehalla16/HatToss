@@ -48,7 +48,7 @@ public class Tweet extends Activity {
 		edit.setMaxLines(3);
 		edit.setSelection(0);
 
-		Button tweetbutton = (Button) findViewById(R.id.tweet);
+		final Button tweetbutton = (Button) findViewById(R.id.tweet);
 		tweetbutton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Log.d("tweet", "onClick");
@@ -57,6 +57,11 @@ public class Tweet extends Activity {
 						.getText();
 				mainTEXT = sb.toString();
 				AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+					@Override
+					protected void onPreExecute() {
+						tweetbutton.setClickable(false);
+					}
+
 					@Override
 					protected Void doInBackground(Void... params) {
 
@@ -73,7 +78,7 @@ public class Tweet extends Activity {
 					protected void onPostExecute(Void result) {
 						Intent intent = new Intent(Tweet.this,
 								RankingActivity.class);
-						intent.putExtra("newresult", 0 );
+						intent.putExtra("newresult", 0);
 						startActivity(intent);
 						finish();
 					}

@@ -60,6 +60,7 @@ public class RankingActivity extends ListActivity {
 
 		// 計測結果があれば
 		if (newResult != null) {
+			boolean addResult = false;
 			// リストが空なら結果を追加
 			if (RANKING.size() == 0) {
 				RANKING.add(newResult + "m　" + date);
@@ -68,13 +69,21 @@ public class RankingActivity extends ListActivity {
 					int index = RANKING.get(i).indexOf("m");
 					BigDecimal defBd = new BigDecimal(RANKING.get(i).substring(
 							0, index));
+					// i番目のデータより大きければiに挿入
 					if (defBd.compareTo(newResult) <= 0) {
 						RANKING.add(i, newResult + "m　" + date);
-						if (10 < RANKING.size()) {
-							RANKING.remove(10);
-						}
+						// 追加フラグon
+						addResult = true;
 						break;
 					}
+				}
+				// 追加されていなければ最後に追加
+				if (addResult == false) {
+					RANKING.addLast(newResult + "m　" + date);
+				}
+				// TOP10落ちデータ削除
+				if (10 < RANKING.size()) {
+					RANKING.remove(10);
 				}
 			}
 		}
