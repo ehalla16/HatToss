@@ -24,6 +24,7 @@ public class StartUpActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.button_left:
 			intent = new Intent(this, TutorialActivity.class);
+			intent.putExtra("agreement", 0 );
 			// 遷移先のアクティビティを起動させる
 			startActivity(intent);
 			break;

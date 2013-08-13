@@ -34,7 +34,7 @@ public class RankingActivity extends ListActivity {
 		// lv = (ListView) findViewById(android.R.id.list);
 		tv = (TextView) findViewById(R.id.result);
 		Button btnLeft = (Button) findViewById(R.id.retry_button);
-		Button btnRight = (Button) findViewById(R.id.tutorial_button);
+		Button btnRight = (Button) findViewById(R.id.quit_button);
 		btnLeft.setOnClickListener(m_clickListener);
 		btnRight.setOnClickListener(m_clickListener);
 		Intent intent = getIntent();
@@ -119,21 +119,22 @@ public class RankingActivity extends ListActivity {
 				intent = getIntent();
 				int agreement = intent.getIntExtra("agreement", 1);
 				if (agreement == 0) {
+					intent = new Intent(RankingActivity.this,
+							StartUpActivity.class);
+					// 次画面のアクティビティ起動
+					startActivity(intent);
 					finish();
 				} else {
 					// インテントのインスタンス生成
-					Intent intent2 = new Intent(RankingActivity.this,
+					intent = new Intent(RankingActivity.this,
 							ReadyActivity.class);
 					// 次画面のアクティビティ起動
-					startActivity(intent2);
+					startActivity(intent);
 					finish();
 				}
 				break;
-			case R.id.tutorial_button:
-				intent = new Intent(RankingActivity.this,
-						TutorialActivity.class);
-				// 遷移先のアクティビティを起動させる
-				startActivity(intent);
+			case R.id.quit_button:
+				finish();
 				break;
 			}
 		}
@@ -148,13 +149,17 @@ public class RankingActivity extends ListActivity {
 			Intent intent = getIntent();
 			int agreement = intent.getIntExtra("agreement", 1);
 			if (agreement == 0) {
+				intent = new Intent(RankingActivity.this,
+						StartUpActivity.class);
+				// 次画面のアクティビティ起動
+				startActivity(intent);
 				finish();
 			} else {
 				// インテントのインスタンス生成
-				Intent intent2 = new Intent(RankingActivity.this,
+				intent = new Intent(RankingActivity.this,
 						ReadyActivity.class);
 				// 次画面のアクティビティ起動
-				startActivity(intent2);
+				startActivity(intent);
 				finish();
 			}
 			return true;

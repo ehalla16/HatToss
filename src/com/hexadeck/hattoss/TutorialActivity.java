@@ -2,7 +2,13 @@ package com.hexadeck.hattoss;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -28,41 +34,23 @@ public class TutorialActivity extends Activity implements OnClickListener {
 			;
 
 	// --------------------------------------------------------------------------
-	// ボタンが押された時の処理
-	// --------------------------------------------------------------------------
-	public void onClick(View v_) {
-		// アクティビティを終了させる事により、一つ前のアクティビティへ戻る事が出来る。
-		finish();
-	}
-
-	// --------------------------------------------------------------------------
 	// ライフサイクル 1 : アクティビティ初期化（iOSの、viewDidLoad）
 	// --------------------------------------------------------------------------
 	public void onCreate(Bundle saved_instance_state_) {
 		super.onCreate(saved_instance_state_);
+		setContentView(R.layout.tutorial);
 
-		// ボタンのインスタンスを作成する
-		Button button = new Button(this);
+		Button btnLeft = (Button) findViewById(R.id.retry_button);
+		Button btnRight = (Button) findViewById(R.id.quit_button);
+		btnLeft.setOnClickListener(m_clickListener);
+		btnRight.setOnClickListener(m_clickListener);
 
-		// ボタンにクリックイベントの通知先を設定する
-		button.setOnClickListener(this);
-
-		// ボタンにテキストを表示する
-		button.setText("戻る");
-
-		// レイアウトを作成する
-		LinearLayout linear_layout = new LinearLayout(this);
-
-		// レイアウトを画面に描画する
-		setContentView(linear_layout);
-
-		// レイアウト内要素の設定を作成する
-		LinearLayout.LayoutParams layout_params = new LinearLayout.LayoutParams(
-				MP, 80);
-		layout_params.gravity = Gravity.CENTER_VERTICAL;
-
-		// ボタンをレイアウトに配置する
-		linear_layout.addView(button, layout_params);
+		Intent intent = getIntent();
+		// TOPからの遷移
+		int agreement = intent.getIntExtra("agreement", 1);
+		if (agreement == 0) {
+			btnLeft.setText("TOP");
+		}
 	}
 
 	// --------------------------------------------------------------------------
@@ -82,14 +70,69 @@ public class TutorialActivity extends Activity implements OnClickListener {
 	}
 
 	// --------------------------------------------------------------------------
+	// ボタンが押された時の処理
+	// --------------------------------------------------------------------------
+	private OnClickListener m_clickListener = new OnClickListener() {
+
+		public void onClick(View v) {
+			Intent intent = null;
+			// 遷移先のActivityを指定して、Intentを作成する
+			switch (v.getId()) {
+			case R.id.retry_button:
+				intent = getIntent();
+				int agreement = intent.getIntExtra("agreement", 1);
+				if (agreement == 0) {
+					intent = new Intent(TutorialActivity.this,
+							StartUpActivity.class);
+					// 次画面のアクティビティ起動
+					startActivity(intent);
+					finish();
+				} else {
+					// インテントのインスタンス生成
+					intent = new Intent(TutorialActivity.this,
+							ReadyActivity.class);
+					// 次画面のアクティビティ起動
+					startActivity(intent);
+					finish();
+				}
+				break;
+			case R.id.quit_button:
+				finish();
+				break;
+			}
+		}
+	};
+
+	// --------------------------------------------------------------------------
 	// BACKキーが押された時の処理
 	// --------------------------------------------------------------------------
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			finish();
+			Intent intent = getIntent();
+			int agreement = intent.getIntExtra("agreement", 1);
+			if (agreement == 0) {
+				intent = new Intent(TutorialActivity.this,
+						StartUpActivity.class);
+				// 次画面のアクティビティ起動
+				startActivity(intent);
+				finish();
+			} else {
+				// インテントのインスタンス生成
+				intent = new Intent(TutorialActivity.this,
+						ReadyActivity.class);
+				// 次画面のアクティビティ起動
+				startActivity(intent);
+				finish();
+			}
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 }

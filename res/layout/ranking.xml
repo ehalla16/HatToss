@@ -53,11 +53,11 @@
             android:text="@string/retry" />
 
         <Button
-            android:id="@+id/tutorial_button"
+            android:id="@+id/quit_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/tutorial" />
+            android:text="@string/quit" />
     </LinearLayout>
 
 </LinearLayout>

@@ -129,11 +129,13 @@ public class ReadyActivity extends Activity implements SensorEventListener {
 				intent = new Intent(ReadyActivity.this, TutorialActivity.class);
 				// 遷移先のアクティビティを起動させる
 				startActivity(intent);
+				finish();
 				break;
 			case R.id.ranking_button:
 				intent = new Intent(ReadyActivity.this, RankingActivity.class);
 				// 遷移先のアクティビティを起動させる
 				startActivity(intent);
+				finish();
 				break;
 			}
 		}

@@ -13,5 +13,6 @@
     <string name="button_ready">Hold here!!</string>
     <string name="nodata">No Result</string>
     <string name="result">Best 10 Result</string>
+    <string name="quit">QUIT</string>
 
 </resources>
