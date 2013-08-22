@@ -38,15 +38,16 @@
                 android:text="@string/attension_text"
                 android:textColor="#000000"
                 android:textSize="9sp" />
-        </LinearLayout>
 
-        <Button
-            android:id="@+id/button_agree"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:text="@string/button_agree" />
+            <Button
+                android:id="@+id/button_agree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="@string/button_agree" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

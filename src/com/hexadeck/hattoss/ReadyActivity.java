@@ -88,7 +88,7 @@ public class ReadyActivity extends Activity implements SensorEventListener {
 				ViewGroup.LayoutParams.FILL_PARENT,
 				ViewGroup.LayoutParams.FILL_PARENT));
 
-		values = (TextView) findViewById(R.id.values);
+//		values = (TextView) findViewById(R.id.values);
 		manager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		button = (Button) findViewById(R.id.button_ready);
 		button.setTypeface(face);
@@ -440,7 +440,7 @@ public class ReadyActivity extends Activity implements SensorEventListener {
 			str = "X軸:" + acceleX + "\nY軸:" + acceleY + "\nZ軸:" + acceleZ
 					+ "\n3軸合成値:" + ms2 + "\n3軸合成最大値:" + mMax + "\n3軸合成最小値:"
 					+ mMin + "\nupSec:" + upSec + "\nmResult:" + mResult;
-			values.setText(str);
+			//values.setText(str);
 		}
 	}
 

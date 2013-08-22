@@ -32,7 +32,6 @@ public class RankingActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ranking);
 		// lv = (ListView) findViewById(android.R.id.list);
-		tv = (TextView) findViewById(R.id.result);
 		Button btnLeft = (Button) findViewById(R.id.retry_button);
 		Button btnRight = (Button) findViewById(R.id.quit_button);
 		btnLeft.setOnClickListener(m_clickListener);

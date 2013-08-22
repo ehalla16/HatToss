@@ -1,6 +1,8 @@
 package com.hexadeck.hattoss.tweet;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 import com.hexadeck.hattoss.R;
 import com.hexadeck.hattoss.RankingActivity;
@@ -19,6 +21,8 @@ import twitter4j.media.ImageUploadFactory;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
@@ -27,6 +31,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Tweet extends Activity {
@@ -37,11 +42,22 @@ public class Tweet extends Activity {
 	private String defoTEXT = "I threw my phone up "
 			+ ReadyActivity.getResultText() + "m" + "! #HatTOSS!!";
 	private String mainTEXT = null;
+	private ImageView imgView = null;
 
 	protected void onCreate(Bundle bundle) {
 
 		super.onCreate(bundle);
 		setContentView(R.layout.tweet);
+		InputStream in;
+		try {
+			in = openFileInput("hatTossImgTmp.jpg");
+			Bitmap bitmap01 = BitmapFactory.decodeStream(in);
+			imgView = (ImageView)findViewById(R.id.bg_pic);  
+			imgView.setImageBitmap(bitmap01);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 
 		final EditText edit = (EditText) findViewById(R.id.editText1);
 		edit.setText(defoTEXT);
