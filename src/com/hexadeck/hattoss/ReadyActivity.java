@@ -60,7 +60,7 @@ public class ReadyActivity extends Activity implements SensorEventListener {
 	/** カメラが現在使用可能かどうか */
 	private boolean mCameraAvailable = true;
 
-	private static double THRESHOLD = 3d; // 最高点到達判定閾値
+	private static double THRESHOLD = 2d; // 最高点到達判定閾値
 	private static double VALUE_G = 9.8d; // 地球の重力加速度
 
 	// チェック用
@@ -132,7 +132,7 @@ public class ReadyActivity extends Activity implements SensorEventListener {
 				finish();
 				break;
 			case R.id.ranking_button:
-				intent = new Intent(ReadyActivity.this, RankingActivity.class);
+				intent = new Intent(ReadyActivity.this, RankingAllActivity.class);
 				// 遷移先のアクティビティを起動させる
 				startActivity(intent);
 				finish();

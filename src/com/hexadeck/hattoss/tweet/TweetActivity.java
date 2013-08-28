@@ -1,9 +1,6 @@
 package com.hexadeck.hattoss.tweet;
 
 import com.hexadeck.hattoss.R;
-import com.hexadeck.hattoss.R.id;
-import com.hexadeck.hattoss.R.layout;
-
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;

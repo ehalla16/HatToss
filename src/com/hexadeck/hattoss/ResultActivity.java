@@ -15,7 +15,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 public class ResultActivity extends Activity {
 
@@ -66,7 +65,7 @@ public class ResultActivity extends Activity {
 						connectTwitter();
 					} catch (TwitterException e) {
 						Intent intent = new Intent(ResultActivity.this,
-								RankingActivity.class);
+								RankingAllActivity.class);
 						intent.putExtra("tweetError", 0);
 						startActivity(intent);
 						finish();
@@ -124,7 +123,7 @@ public class ResultActivity extends Activity {
 						finish();
 					} catch (TwitterException e) {
 						Intent intent = new Intent(ResultActivity.this,
-								RankingActivity.class);
+								RankingAllActivity.class);
 						intent.putExtra("tweetError", 0);
 						startActivity(intent);
 						finish();

@@ -29,7 +29,7 @@ public class StartUpActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.button_right:
-			intent = new Intent(this, RankingActivity.class);
+			intent = new Intent(this, RankingAllActivity.class);
 			intent.putExtra("agreement", 0 );
 			// 遷移先のアクティビティを起動させる
 			startActivity(intent);

@@ -3,7 +3,6 @@
     android:id="@+id/main_ui"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ranking_bg"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -13,23 +12,12 @@
         android:orientation="vertical" >
 
         <ListView
-            android:id="@id/android:list"
+            android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp" >
 
         </ListView>
-
-        <TextView
-            android:id="@id/android:empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="100dp"
-            android:text="@string/nodata"
-            android:textSize="20sp" >
-
-        </TextView>
 
     </LinearLayout>
 

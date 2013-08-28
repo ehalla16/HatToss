@@ -4,16 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.hexadeck.hattoss.R;
-import com.hexadeck.hattoss.RankingActivity;
-import com.hexadeck.hattoss.ReadyActivity;
-import com.hexadeck.hattoss.ResultActivity;
-import com.hexadeck.hattoss.R.id;
-import com.hexadeck.hattoss.R.layout;
+import jp.basicinc.gamefeat.ranking.android.sdk.controller.GFRankingController;
 
-import twitter4j.Twitter;
+import com.hexadeck.hattoss.R;
+import com.hexadeck.hattoss.ReadyActivity;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 import twitter4j.media.ImageUpload;
 import twitter4j.media.ImageUploadFactory;
@@ -32,7 +27,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class Tweet extends Activity {
 
@@ -92,11 +86,18 @@ public class Tweet extends Activity {
 
 					@Override
 					protected void onPostExecute(Void result) {
-						Intent intent = new Intent(Tweet.this,
-								RankingActivity.class);
-						intent.putExtra("newresult", 0);
-						startActivity(intent);
-						finish();
+					// スコア送信（ランキング用）
+			            String sResult = ReadyActivity.getResultText();
+						String[] gameIds = { "com.hattoss.hexadeck" };
+						String[] scores = { sResult };
+						GFRankingController appController = GFRankingController
+								.getIncetance(Tweet.this);
+						appController.sendScore(gameIds, scores);
+						// スコア送信（スコア履歴用）
+						appController.sendHistoryScore(gameIds, scores);
+						// ランキング表示
+						GFRankingController.show(Tweet.this,
+								"com.hattoss.hexadeck");
 					}
 				};
 				task.execute(); // ここでは何も渡さない
@@ -105,7 +106,7 @@ public class Tweet extends Activity {
 		Button cancelbutton = (Button) findViewById(R.id.tweet_cancel);
 		cancelbutton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(Tweet.this, RankingActivity.class);
+				Intent intent = new Intent(Tweet.this, ReadyActivity.class);
 				startActivity(intent);
 				finish();
 			}
@@ -131,9 +132,6 @@ public class Tweet extends Activity {
 
 		ImageUpload imageUpload = new ImageUploadFactory(confbuilder.build())
 				.getInstance();
-
-		// Twitter twitter = new
-		// TwitterFactory(confbuilder.build()).getInstance();
 
 		String path = getApplication().getFilesDir().getAbsolutePath()
 				+ "/hatTossImgTmp.jpg";

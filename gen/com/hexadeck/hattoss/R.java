@@ -32,31 +32,32 @@ public final class R {
         public static final int tutorial=0x7f020008;
     }
     public static final class id {
-        public static final int FrameLayout1=0x7f080012;
-        public static final int action_settings=0x7f080019;
-        public static final int attention=0x7f08000d;
-        public static final int bg_pic=0x7f080013;
-        public static final int button_agree=0x7f08000f;
-        public static final int button_left=0x7f080010;
+        public static final int FrameLayout1=0x7f080013;
+        public static final int action_settings=0x7f08001a;
+        public static final int attention=0x7f08000e;
+        public static final int bg_pic=0x7f080014;
+        public static final int button_agree=0x7f080010;
+        public static final int button_left=0x7f080011;
         public static final int button_ready=0x7f080002;
-        public static final int button_right=0x7f080011;
+        public static final int button_right=0x7f080012;
         public static final int camera_frame=0x7f080006;
         public static final int camera_preview=0x7f080005;
-        public static final int content=0x7f08000c;
-        public static final int editText1=0x7f080015;
+        public static final int content=0x7f08000d;
+        public static final int editText1=0x7f080016;
+        public static final int list=0x7f08000b;
         public static final int main_ui=0x7f080000;
         public static final int picture_frame=0x7f080007;
         public static final int picture_view=0x7f080008;
-        public static final int quit_button=0x7f08000b;
+        public static final int quit_button=0x7f08000c;
         public static final int ranking_button=0x7f080004;
         public static final int retry_button=0x7f080009;
-        public static final int textView1=0x7f080014;
-        public static final int textView2=0x7f08000e;
+        public static final int textView1=0x7f080015;
+        public static final int textView2=0x7f08000f;
         public static final int tutorial_button=0x7f080003;
-        public static final int tweet=0x7f080017;
+        public static final int tweet=0x7f080018;
         public static final int tweet_button=0x7f08000a;
-        public static final int tweet_cancel=0x7f080016;
-        public static final int twitterlogin=0x7f080018;
+        public static final int tweet_cancel=0x7f080017;
+        public static final int twitterlogin=0x7f080019;
         public static final int values=0x7f080001;
     }
     public static final class layout {

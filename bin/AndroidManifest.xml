@@ -22,7 +22,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        android:hardwareAccelerated="true" >
         <activity
             android:name="com.hexadeck.hattoss.StartUpActivity"
             android:label="@string/app_name"
@@ -78,7 +79,14 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name="com.hexadeck.hattoss.RankingAllActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        
         <!-- Ranking START -->
         <meta-data
             android:name="gamefeat_ranking_api_key"
@@ -87,7 +95,8 @@
         <activity
             android:name="jp.basicinc.gamefeat.ranking.android.sdk.activity.GFRankingActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:label="Ranking" >
+            android:label="Ranking"
+            android:hardwareAccelerated="true" >
         </activity>
         <!-- Ranking END -->
         <!-- GameFeat START -->
@@ -98,13 +107,15 @@
         <activity
             android:name="jp.basicinc.gamefeat.android.sdk.view.GameFeatAppActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:label="GameFeat" >
+            android:label="GameFeat"
+            android:hardwareAccelerated="true" >
         </activity>
         <activity
             android:name="jp.basicinc.gamefeat.android.sdk.view.GameFeatAppChildActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="GameFeat"
-            android:screenOrientation="sensor" >
+            android:screenOrientation="sensor"
+            android:hardwareAccelerated="true" >
         </activity>
 
         <receiver

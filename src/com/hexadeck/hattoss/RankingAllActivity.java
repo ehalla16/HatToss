@@ -3,29 +3,27 @@ package com.hexadeck.hattoss;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 
+import jp.basicinc.gamefeat.ranking.android.sdk.controller.GFRankingController;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.text.format.Time;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class RankingActivity extends FragmentActivity {
+public class RankingAllActivity extends FragmentActivity {
 	public static final LinkedList<String> RANKING = new LinkedList<String>();
 	BigDecimal newResult = null;
-	private static final String TAG = "RankingActivity";
+	private static final String TAG = "RankingAllActivity";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ranking);
-		// lv = (ListView) findViewById(android.R.id.list);
 		Button btnLeft = (Button) findViewById(R.id.retry_button);
 		Button btnRight = (Button) findViewById(R.id.quit_button);
 		btnLeft.setOnClickListener(m_clickListener);
@@ -45,60 +43,37 @@ public class RankingActivity extends FragmentActivity {
 			Toast.makeText(this, "ツイートに失敗しました", Toast.LENGTH_SHORT).show();
 			newResult = new BigDecimal(ReadyActivity.getResultText());
 		}
-
-		Time time = new Time("Asia/Tokyo");
-		time.setToNow();
-		String date = time.year + "/" + (time.month + 1) + "/" + time.monthDay
-				+ "　" + time.hour + ":" + String.format("%1$02d", time.minute);
-
 		// 計測結果があれば
 		if (newResult != null) {
-			boolean addResult = false;
-			// リストが空なら結果を追加
-			if (RANKING.size() == 0) {
-				RANKING.add(newResult + "m　" + date);
-			} else {
-				for (int i = 0; i < RANKING.size(); i++) {
-					int index = RANKING.get(i).indexOf("m");
-					BigDecimal defBd = new BigDecimal(RANKING.get(i).substring(
-							0, index));
-					// i番目のデータより大きければiに挿入
-					if (defBd.compareTo(newResult) <= 0) {
-						RANKING.add(i, newResult + "m　" + date);
-						// 追加フラグon
-						addResult = true;
-						break;
-					}
-				}
-				// 追加されていなければ最後に追加
-				if (addResult == false) {
-					RANKING.addLast(newResult + "m　" + date);
-				}
-				// TOP10落ちデータ削除
-				if (10 < RANKING.size()) {
-					RANKING.remove(10);
-				}
-			}
+            String dResult = ReadyActivity.getResultText();
+
+			// スコア送信（ランキング用）
+			String[] gameIds = { "com.hattoss.hexadeck" };
+			String[] scores = { dResult };
+			Log.d(TAG, "scores:" + scores[0]);
+			GFRankingController appController = GFRankingController
+					.getIncetance(RankingAllActivity.this);
+			appController.sendScore(gameIds, scores);
+			// スコア送信（スコア履歴用）
+			appController.sendHistoryScore(gameIds, scores);
 		}
-		LinkedList<String> adapterList = new LinkedList<String>();
-		String prize = null;
-		for (int i = 0; i < RANKING.size(); i++) {
-			if (i == 0) {
-				prize = "st";
-			} else if (i == 1) {
-				prize = "nd";
-			} else if (i == 2) {
-				prize = "rd";
-			} else {
-				prize = "th";
-			}
-			adapterList.add(i + 1 + prize + " : " + RANKING.get(i));
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_expandable_list_item_1, adapterList);
-        ListView listView = (ListView)findViewById(R.id.list);
-        listView.setAdapter(adapter);
+		// ランキング表示
+		GFRankingController.show(RankingAllActivity.this,
+				"com.hattoss.hexadeck");
+//		finish();
 	}
+	
+	@Override
+    public void onPause(){
+    	super.onPause();
+    }
+    
+    @Override
+    public void onResume(){
+    	super.onResume();
+    }
+	
+	
 
 	// --------------------------------------------------------------------------
 	// ボタンが押された時の処理
@@ -113,14 +88,14 @@ public class RankingActivity extends FragmentActivity {
 				intent = getIntent();
 				int agreement = intent.getIntExtra("agreement", 1);
 				if (agreement == 0) {
-					intent = new Intent(RankingActivity.this,
+					intent = new Intent(RankingAllActivity.this,
 							StartUpActivity.class);
 					// 次画面のアクティビティ起動
 					startActivity(intent);
 					finish();
 				} else {
 					// インテントのインスタンス生成
-					intent = new Intent(RankingActivity.this,
+					intent = new Intent(RankingAllActivity.this,
 							ReadyActivity.class);
 					// 次画面のアクティビティ起動
 					startActivity(intent);
@@ -143,14 +118,14 @@ public class RankingActivity extends FragmentActivity {
 			Intent intent = getIntent();
 			int agreement = intent.getIntExtra("agreement", 1);
 			if (agreement == 0) {
-				intent = new Intent(RankingActivity.this,
+				intent = new Intent(RankingAllActivity.this,
 						StartUpActivity.class);
 				// 次画面のアクティビティ起動
 				startActivity(intent);
 				finish();
 			} else {
 				// インテントのインスタンス生成
-				intent = new Intent(RankingActivity.this,
+				intent = new Intent(RankingAllActivity.this,
 						ReadyActivity.class);
 				// 次画面のアクティビティ起動
 				startActivity(intent);

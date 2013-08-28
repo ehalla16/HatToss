@@ -1,9 +1,6 @@
 package com.hexadeck.hattoss.tweet;
 
 import com.hexadeck.hattoss.R;
-import com.hexadeck.hattoss.R.id;
-import com.hexadeck.hattoss.R.layout;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
