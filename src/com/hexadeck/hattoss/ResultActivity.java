@@ -1,5 +1,7 @@
 package com.hexadeck.hattoss;
 
+import jp.basicinc.gamefeat.ranking.android.sdk.controller.GFRankingController;
+
 import com.hexadeck.hattoss.tweet.Tweet;
 import com.hexadeck.hattoss.tweet.TwitterLogin;
 
@@ -15,6 +17,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class ResultActivity extends Activity {
 
@@ -92,7 +95,7 @@ public class ResultActivity extends Activity {
 			final Intent intent) {
 
 		if (resultCode == RESULT_OK) {
-			Log.d("resultCode", "resultCode = " + RESULT_OK);
+			Log.d("RESULT_OK", "resultCode = " + RESULT_OK);
 
 			super.onActivityResult(requestCode, resultCode, intent);
 			AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
@@ -132,6 +135,23 @@ public class ResultActivity extends Activity {
 				}
 			};
 			task.execute(); // ここでは何も渡さない
+		} else if (resultCode == RESULT_CANCELED) {
+			Log.d("RESULT_CANCELED", "resultCode = " + RESULT_CANCELED);
+			Toast.makeText(this, "No Tweet.", Toast.LENGTH_LONG).show();
+			// スコア送信（ランキング用）
+			String sResult = ReadyActivity.getResultText();
+			String[] gameIds = { "com.hattoss.hexadeck" };
+			String[] scores = { sResult };
+			GFRankingController appController = GFRankingController
+					.getIncetance(ResultActivity.this);
+			appController.sendScore(gameIds, scores);
+			// スコア送信（スコア履歴用）
+			appController.sendHistoryScore(gameIds, scores);
+
+			// ツイートなしでランキングページへ
+			Intent intent2 = new Intent(this, RankingAllActivity.class);
+			startActivity(intent2);
+
 		}
 	}
 

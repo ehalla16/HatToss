@@ -25,30 +25,37 @@ public class TwitterLogin extends Activity {
 				super.onPageFinished(view, url);
 
 				String CALLBACK_URL = "myapp://oauth";
-				if (url != null && url.startsWith(CALLBACK_URL)) {
-					String[] urlParameters = url.split("\\?")[1].split("&");
+				try {
+					if (url != null && url.startsWith(CALLBACK_URL)) {
+						String[] urlParameters = url.split("\\?")[1].split("&");
 
-					String oauthToken = "";
-					String oauthVerifier = "";
+						String oauthToken = "";
+						String oauthVerifier = "";
 
-					if (urlParameters[0].startsWith("oauth_token")) {
-						oauthToken = urlParameters[0].split("=")[1];
-					} else if (urlParameters[1].startsWith("oauth_token")) {
-						oauthToken = urlParameters[1].split("=")[1];
+						if (urlParameters[0].startsWith("oauth_token")) {
+							oauthToken = urlParameters[0].split("=")[1];
+						} else if (urlParameters[1].startsWith("oauth_token")) {
+							oauthToken = urlParameters[1].split("=")[1];
+						}
+
+						if (urlParameters[0].startsWith("oauth_verifier")) {
+							oauthVerifier = urlParameters[0].split("=")[1];
+						} else if (urlParameters[1]
+								.startsWith("oauth_verifier")) {
+							oauthVerifier = urlParameters[1].split("=")[1];
+						}
+
+						Intent intent = getIntent();
+						intent.putExtra("oauth_token", oauthToken);
+						intent.putExtra("oauth_verifier", oauthVerifier);
+
+						setResult(Activity.RESULT_OK, intent);
+						finish();
 					}
-
-					if (urlParameters[0].startsWith("oauth_verifier")) {
-						oauthVerifier = urlParameters[0].split("=")[1];
-					} else if (urlParameters[1].startsWith("oauth_verifier")) {
-						oauthVerifier = urlParameters[1].split("=")[1];
-					}
-
+				} catch (ArrayIndexOutOfBoundsException e) {
 					Intent intent = getIntent();
-					intent.putExtra("oauth_token", oauthToken);
-					intent.putExtra("oauth_verifier", oauthVerifier);
-
-					setResult(Activity.RESULT_OK, intent);
-					finish();
+					setResult(Activity.RESULT_CANCELED, intent);
+					finish();					
 				}
 			}
 		});

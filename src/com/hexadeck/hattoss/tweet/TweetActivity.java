@@ -1,6 +1,8 @@
 package com.hexadeck.hattoss.tweet;
 
 import com.hexadeck.hattoss.R;
+import com.hexadeck.hattoss.RankingAllActivity;
+
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -63,20 +65,20 @@ public class TweetActivity extends Activity {
 			}
 		});
 
-//		Button logoutbutton = (Button) findViewById(R.id.logout);
-//		logoutbutton.setOnClickListener(new View.OnClickListener() {
-//			public void onClick(View view) {
-//
-//				disconnectTwitter();
-//				try {
-//					connectTwitter();
-//				} catch (TwitterException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//
-//		});
+		// Button logoutbutton = (Button) findViewById(R.id.logout);
+		// logoutbutton.setOnClickListener(new View.OnClickListener() {
+		// public void onClick(View view) {
+		//
+		// disconnectTwitter();
+		// try {
+		// connectTwitter();
+		// } catch (TwitterException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
+		//
+		// });
 
 	}
 
@@ -111,6 +113,10 @@ public class TweetActivity extends Activity {
 			} catch (TwitterException e) {
 				// showToast(R.string.nechatter_connect_error);
 			}
+		} else if (resultCode == RESULT_CANCELED) {
+			// ランキングページへGO
+			Intent intent3 = new Intent(TweetActivity.this, RankingAllActivity.class);
+			this.startActivityForResult(intent3, 0);			
 		}
 	}
 

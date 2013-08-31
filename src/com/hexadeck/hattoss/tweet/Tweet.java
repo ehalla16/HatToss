@@ -7,12 +7,13 @@ import java.io.InputStream;
 import jp.basicinc.gamefeat.ranking.android.sdk.controller.GFRankingController;
 
 import com.hexadeck.hattoss.R;
+import com.hexadeck.hattoss.RankingAllActivity;
 import com.hexadeck.hattoss.ReadyActivity;
+
 import twitter4j.TwitterException;
 import twitter4j.conf.ConfigurationBuilder;
 import twitter4j.media.ImageUpload;
 import twitter4j.media.ImageUploadFactory;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -78,8 +79,7 @@ public class Tweet extends Activity {
 						try {
 							tweet();
 						} catch (TwitterException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							Log.d("","Tweet失敗");
 						}
 						return null;
 					}
@@ -95,9 +95,8 @@ public class Tweet extends Activity {
 						appController.sendScore(gameIds, scores);
 						// スコア送信（スコア履歴用）
 						appController.sendHistoryScore(gameIds, scores);
-						// ランキング表示
-						GFRankingController.show(Tweet.this,
-								"com.hattoss.hexadeck");
+						Intent intent = new Intent(Tweet.this, RankingAllActivity.class);
+						startActivity(intent);
 					}
 				};
 				task.execute(); // ここでは何も渡さない
@@ -106,7 +105,7 @@ public class Tweet extends Activity {
 		Button cancelbutton = (Button) findViewById(R.id.tweet_cancel);
 		cancelbutton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(Tweet.this, ReadyActivity.class);
+				Intent intent = new Intent(Tweet.this, RankingAllActivity.class);
 				startActivity(intent);
 				finish();
 			}

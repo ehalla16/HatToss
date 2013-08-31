@@ -1,5 +1,6 @@
 package com.hexadeck.hattoss;
 
+import jp.basicinc.gamefeat.ranking.android.sdk.controller.GFRankingController;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -24,15 +25,15 @@ public class StartUpActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.button_left:
 			intent = new Intent(this, TutorialActivity.class);
-			intent.putExtra("agreement", 0 );
+			intent.putExtra("agreement", 0);
 			// 遷移先のアクティビティを起動させる
 			startActivity(intent);
 			break;
 		case R.id.button_right:
-			intent = new Intent(this, RankingAllActivity.class);
-			intent.putExtra("agreement", 0 );
-			// 遷移先のアクティビティを起動させる
-			startActivity(intent);
+			 intent = new Intent(this, RankingAllActivity.class);
+			 intent.putExtra("agreement", 0 );
+			 // 遷移先のアクティビティを起動させる
+			 startActivity(intent);
 			break;
 		}
 	}
