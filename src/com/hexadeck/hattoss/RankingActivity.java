@@ -51,53 +51,57 @@ public class RankingActivity extends FragmentActivity {
 		String date = time.year + "/" + (time.month + 1) + "/" + time.monthDay
 				+ "　" + time.hour + ":" + String.format("%1$02d", time.minute);
 
+/**
+ * 自作ランキングシステム
+ * 自分の記録のBEST10を表示
+ */
 		// 計測結果があれば
-		if (newResult != null) {
-			boolean addResult = false;
-			// リストが空なら結果を追加
-			if (RANKING.size() == 0) {
-				RANKING.add(newResult + "m　" + date);
-			} else {
-				for (int i = 0; i < RANKING.size(); i++) {
-					int index = RANKING.get(i).indexOf("m");
-					BigDecimal defBd = new BigDecimal(RANKING.get(i).substring(
-							0, index));
-					// i番目のデータより大きければiに挿入
-					if (defBd.compareTo(newResult) <= 0) {
-						RANKING.add(i, newResult + "m　" + date);
-						// 追加フラグon
-						addResult = true;
-						break;
-					}
-				}
-				// 追加されていなければ最後に追加
-				if (addResult == false) {
-					RANKING.addLast(newResult + "m　" + date);
-				}
-				// TOP10落ちデータ削除
-				if (10 < RANKING.size()) {
-					RANKING.remove(10);
-				}
-			}
-		}
-		LinkedList<String> adapterList = new LinkedList<String>();
-		String prize = null;
-		for (int i = 0; i < RANKING.size(); i++) {
-			if (i == 0) {
-				prize = "st";
-			} else if (i == 1) {
-				prize = "nd";
-			} else if (i == 2) {
-				prize = "rd";
-			} else {
-				prize = "th";
-			}
-			adapterList.add(i + 1 + prize + " : " + RANKING.get(i));
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_expandable_list_item_1, adapterList);
-        ListView listView = (ListView)findViewById(R.id.list);
-        listView.setAdapter(adapter);
+//		if (newResult != null) {
+//			boolean addResult = false;
+//			// リストが空なら結果を追加
+//			if (RANKING.size() == 0) {
+//				RANKING.add(newResult + "m　" + date);
+//			} else {
+//				for (int i = 0; i < RANKING.size(); i++) {
+//					int index = RANKING.get(i).indexOf("m");
+//					BigDecimal defBd = new BigDecimal(RANKING.get(i).substring(
+//							0, index));
+//					// i番目のデータより大きければiに挿入
+//					if (defBd.compareTo(newResult) <= 0) {
+//						RANKING.add(i, newResult + "m　" + date);
+//						// 追加フラグon
+//						addResult = true;
+//						break;
+//					}
+//				}
+//				// 追加されていなければ最後に追加
+//				if (addResult == false) {
+//					RANKING.addLast(newResult + "m　" + date);
+//				}
+//				// TOP10落ちデータ削除
+//				if (10 < RANKING.size()) {
+//					RANKING.remove(10);
+//				}
+//			}
+//		}
+//		LinkedList<String> adapterList = new LinkedList<String>();
+//		String prize = null;
+//		for (int i = 0; i < RANKING.size(); i++) {
+//			if (i == 0) {
+//				prize = "st";
+//			} else if (i == 1) {
+//				prize = "nd";
+//			} else if (i == 2) {
+//				prize = "rd";
+//			} else {
+//				prize = "th";
+//			}
+//			adapterList.add(i + 1 + prize + " : " + RANKING.get(i));
+//		}
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//				android.R.layout.simple_expandable_list_item_1, adapterList);
+//        ListView listView = (ListView)findViewById(R.id.list); //要レイアウト
+//        listView.setAdapter(adapter);
 	}
 
 	// --------------------------------------------------------------------------
