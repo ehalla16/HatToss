@@ -97,6 +97,7 @@ public class Tweet extends Activity {
 						appController.sendHistoryScore(gameIds, scores);
 						Intent intent = new Intent(Tweet.this, RankingAllActivity.class);
 						startActivity(intent);
+						finish();
 					}
 				};
 				task.execute(); // ここでは何も渡さない

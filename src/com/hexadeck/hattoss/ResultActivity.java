@@ -151,7 +151,7 @@ public class ResultActivity extends Activity {
 			// ツイートなしでランキングページへ
 			Intent intent2 = new Intent(this, RankingAllActivity.class);
 			startActivity(intent2);
-
+			finish();
 		}
 	}
 
